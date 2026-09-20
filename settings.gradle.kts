@@ -17,4 +17,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "BomberMama"
-include(":app", ":core")
+include(":app", ":core", ":screenshot")
