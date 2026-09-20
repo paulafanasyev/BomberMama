@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.BomberMama" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_gradient</item>
+        <item name="android:statusBarColor" tools:targetApi="21">@color/ic_launcher_background</item>
+        <item name="android:navigationBarColor" tools:targetApi="21">@color/ic_launcher_background</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.BomberMama.Game" parent="Theme.BomberMama">
+        <item name="android:screenOrientation">landscape</item>
+        <item name="android:configChanges">orientation|screenSize|keyboardHidden</item>
+    </style>
+
+    <style name="Theme.BomberMama.Menu" parent="Theme.BomberMama">
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:configChanges">orientation|screenSize|keyboardHidden</item>
+    </style>
+
+    <!-- Текстовые стили в пиксельном духе. -->
+    <style name="TextAppearance.BomberMama" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:textColor">@color/ui_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.BomberMama.Title">
+        <item name="android:textColor">@color/ui_text</item>
+        <item name="android:shadowColor">@color/ui_shadow</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">8</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <style name="TextAppearance.BomberMama.Button">
+        <item name="android:textColor">@color/ui_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+</resources>

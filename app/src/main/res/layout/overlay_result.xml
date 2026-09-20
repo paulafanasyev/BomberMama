@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+
+    <com.bombermama.game.ConfettiView
+        android:id="@+id/confetti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp">
+
+        <TextView
+            android:id="@+id/overlayTitle"
+            style="@style/TextAppearance.BomberMama.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="42sp"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/overlaySubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ui_dim"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/overlayScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ui_gold"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnPrimary"
+            style="@style/TextAppearance.BomberMama.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="14dp"
+            android:textSize="17sp"
+            android:background="@drawable/btn_success" />
+
+        <Button
+            android:id="@+id/btnSecondary"
+            style="@style/TextAppearance.BomberMama.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="14dp"
+            android:textSize="17sp"
+            android:background="@drawable/btn_secondary" />
+
+        <Button
+            android:id="@+id/btnTertiary"
+            style="@style/TextAppearance.BomberMama.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="14dp"
+            android:textSize="17sp"
+            android:background="@drawable/btn_secondary" />
+
+    </LinearLayout>
+
+</FrameLayout>

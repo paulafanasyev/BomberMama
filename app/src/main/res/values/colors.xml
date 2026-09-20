@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#2E2740</color>
+
+    <!-- UI палитра (зеркалирует Palette.kt) -->
+    <color name="ui_bg">#2E2740</color>
+    <color name="ui_panel">#453C5C</color>
+    <color name="ui_accent">#E0557A</color>
+    <color name="ui_text">#F6E3C8</color>
+    <color name="ui_dim">#8E8BA8</color>
+    <color name="ui_shadow">#1A1626</color>
+    <color name="ui_green">#7BD88A</color>
+    <color name="ui_red">#E06A5A</color>
+    <color name="ui_gold">#FFE066</color>
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===================== НАЗВАНИЕ ===================== -->
+    <string name="app_name">BomberMama</string>
+
+    <!-- ===================== ГЛАВНОЕ МЕНЮ ===================== -->
+    <string name="menu_title">BOMBERMAMA</string>
+    <string name="menu_subtitle">Приключения Героини-Мамы</string>
+    <string name="menu_new_game">▶ НОВАЯ ИГРА</string>
+    <string name="menu_levels">🗺 УРОВНИ</string>
+    <string name="menu_records">🏆 РЕКОРДЫ</string>
+    <string name="menu_settings">⚙ НАСТРОЙКИ</string>
+    <string name="menu_help">❓ ПОМОЩЬ</string>
+    <string name="menu_exit">🚪 ВЫХОД</string>
+
+    <!-- ===================== ИГРОВОЙ HUD ===================== -->
+    <string name="hud_lives">Жизни</string>
+    <string name="hud_bombs">Бомбы</string>
+    <string name="hud_fire">Радиус</string>
+    <string name="hud_score">Очки</string>
+    <string name="hud_level">Уровень</string>
+    <string name="hud_exit_open">ВЫХОД ОТКРЫТ — НАЙДИТЕ ДВЕРЬ!</string>
+    <string name="hud_pause">⏸</string>
+
+    <!-- ===================== ПАУЗА ===================== -->
+    <string name="pause_title">ПАУЗА</string>
+    <string name="pause_resume">▶ ПРОДОЛЖИТЬ</string>
+    <string name="pause_restart">🔄 НАЧАТЬ ЗАНОВО</string>
+    <string name="pause_menu">🏠 В МЕНЮ</string>
+
+    <!-- ===================== ПОБЕДА ===================== -->
+    <string name="win_title">ПОБЕДА!</string>
+    <string name="win_subtitle">УРОВЕНЬ ПРОЙДЕН</string>
+    <string name="win_score">Очки: %1$d</string>
+    <string name="win_bonus">Бонус за время: +%1$d</string>
+    <string name="win_next">▶ СЛЕДУЮЩИЙ УРОВЕНЬ</string>
+    <string name="win_repeat">🔄 ПОВТОРИТЬ</string>
+    <string name="win_menu">🏠 В МЕНЮ</string>
+    <string name="win_final">🏆 ПОЗДРАВЛЯЕМ! ИГРА ПРОЙДЕНА</string>
+
+    <!-- ===================== ПОРАЖЕНИЕ ===================== -->
+    <string name="lose_title">ИГРА ОКОНЧЕНА</string>
+    <string name="lose_score">Очки: %1$d</string>
+    <string name="lose_retry">🔄 ПОПРОБОВАТЬ СНОВА</string>
+    <string name="lose_menu">🏠 В МЕНЮ</string>
+
+    <!-- ===================== УРОВНИ ===================== -->
+    <string name="levels_title">УРОВНИ</string>
+    <string name="levels_locked">🔒</string>
+    <string name="levels_completed">★</string>
+    <string name="levels_back">🏠 В МЕНЮ</string>
+    <string name="level_select_desc">Уровень %1$d</string>
+
+    <!-- ===================== РЕКОРДЫ ===================== -->
+    <string name="records_title">РЕКОРДЫ</string>
+    <string name="records_best">ЛУЧШИЙ РЕЗУЛЬТАТ</string>
+    <string name="records_levels">ПРОЙДЕНО УРОВНЕЙ</string>
+    <string name="records_reset">🗑 СБРОСИТЬ ПРОГРЕСС</string>
+    <string name="records_reset_confirm">Сбросить весь прогресс?</string>
+    <string name="records_reset_yes">Да, сбросить</string>
+    <string name="records_reset_no">Отмена</string>
+    <string name="records_no_record">—</string>
+
+    <!-- ===================== НАСТРОЙКИ ===================== -->
+    <string name="settings_title">НАСТРОЙКИ</string>
+    <string name="settings_sound">🔊 ЗВУК</string>
+    <string name="settings_sound_on">ВКЛ</string>
+    <string name="settings_sound_off">ВЫКЛ</string>
+    <string name="settings_music">🎵 МУЗЫКА</string>
+    <string name="settings_music_on">ВКЛ</string>
+    <string name="settings_music_off">ВЫКЛ</string>
+    <string name="settings_vibrate">📳 ВИБРАЦИЯ</string>
+    <string name="settings_back">🏠 В МЕНЮ</string>
+
+    <!-- ===================== ПОМОЩЬ ===================== -->
+    <string name="help_title">ПОМОЩЬ</string>
+    <string name="help_goal_title">🎯 ЦЕЛЬ</string>
+    <string name="help_goal">Уничтожьте всех врагов бомбами и найдите выход с уровня. Осторожно: взрыв ранит и саму героиню!</string>
+    <string name="help_controls_title">🎮 УПРАВЛЕНИЕ</string>
+    <string name="help_controls">• Джойстик слева — движение героини.\n• Кнопка 💣 справа — поставить бомбу (можно удерживать для повтора).\n• Кнопка ⏸ сверху — пауза.</string>
+    <string name="help_bonuses_title">🎁 БОНУСЫ</string>
+    <string name="help_bonuses">🔥 — увеличивает радиус взрыва.\n💣 — добавляет ещё одну бомбу.\n🏃 — ускоряет героиню.\n❤️ — дополнительная жизнь.\n⭐ — бонусные очки.\nБонусы спрятаны в разрушаемых блоках.</string>
+    <string name="help_enemies_title">👹 ВРАГИ</string>
+    <string name="help_enemies">🟢 Слайм — медленный и неуклюжий.\n🦇 Летучая мышь — быстрая и непредсказуемая.\n👻 Призрак — постоянно меняет направление.\n😈 Демон — преследует героиню!\nЦепная реакция: взрыв подрывает соседние бомбы!</string>
+    <string name="help_back">🏠 В МЕНЮ</string>
+
+    <!-- ===================== СИСТЕМНЫЕ ===================== -->
+    <string name="ok">OK</string>
+    <string name="cancel">Отмена</string>
+    <string name="loading">Загрузка…</string>
+</resources>
