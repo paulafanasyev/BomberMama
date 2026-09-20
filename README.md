@@ -9,6 +9,38 @@
 
 ---
 
+## 📸 Скриншоты
+
+Сгенерированы **реальным движком** (модуль `:screenshot`): настоящий `GameEngine`,
+настоящий игровой цикл, настоящий рендер — не мокапы.
+
+<table>
+  <tr><td align="center">Главное меню</td><td align="center">Старт уровня</td></tr>
+  <tr>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/menu.png" width="400"></td>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/level_1_start.png" width="400"></td>
+  </tr>
+  <tr><td align="center">Взрыв крестом</td><td align="center">Цепная реакция</td></tr>
+  <tr>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/level_2_explosion.png" width="400"></td>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/chain_reaction.png" width="400"></td>
+  </tr>
+  <tr><td align="center">Бонусы</td><td align="center">Враги</td></tr>
+  <tr>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/bonuses.png" width="400"></td>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/enemies.png" width="400"></td>
+  </tr>
+  <tr><td align="center">Пауза</td><td align="center">Победа</td></tr>
+  <tr>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/paused.png" width="400"></td>
+    <td><img src="https://github.com/paulafanasyev/BomberMama/releases/download/v1.0/win.png" width="400"></td>
+  </tr>
+</table>
+
+Все скриншоты: [страница релиза v1.0](https://github.com/paulafanasyev/BomberMama/releases/tag/v1.0)
+
+---
+
 ## 🎮 Геймплей
 
 - **Вид сверху**, квадратное клеточное поле
@@ -51,6 +83,11 @@ app/   — Android-слой
        save/   — SharedProgressStore
        ui/     — MainActivity, LevelsActivity, RecordsActivity,
                  SettingsActivity, HelpActivity
+
+screenshot/ — генератор скриншотов (чистая JVM)
+       ScreenshotMaker · SceneRenderer · SpriteFactory · PixCanvas
+       PngEncoder · Glyph (пиксельный шрифт 5x7 с кириллицей)
+       Запускает настоящий GameEngine и рендерит кадры геймплея.
 ```
 
 ## ✅ Качество
@@ -71,6 +108,8 @@ app/   — Android-слой
    добавлено принудительное вычищение стартовой зоны.
 3. `damagePlayer()` **стирал кадр взрыва** и мог ломать текущую цепочку —
    теперь снимаются только невзорвавшиеся бомбы, а поиск цепочки идёт по снимку.
+4. **Порядок каналов в PNG-энкодере** скриншотов был ARGB вместо RGBA —
+   все цвета отображались смещёнными. Исправлено; проверено попиксельно.
 
 ## 🚀 Сборка
 
