@@ -2,16 +2,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#5A5278" />
-            <stroke android:width="3dp" android:color="#F6E3C8" />
-            <corners android:radius="14dp" />
+            <solid android:color="#E8C79A" />
+            <stroke android:width="3dp" android:color="#3A2E20" />
+            <corners android:radius="12dp" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#453C5C" />
-            <stroke android:width="3dp" android:color="#8E8BA8" />
-            <corners android:radius="14dp" />
+            <solid android:color="#F6E3C8" />
+            <stroke android:width="3dp" android:color="#3A2E20" />
+            <corners android:radius="12dp" />
         </shape>
     </item>
 </selector>

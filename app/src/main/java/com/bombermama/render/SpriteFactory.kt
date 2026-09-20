@@ -35,17 +35,35 @@ class SpriteFactory(private val scale: Int = 4) {
         val bmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val c = Canvas(bmp)
         val p = Paint().apply { isAntiAlias = false }
+        // База — трава двух оттенков в шахматном порядке.
         val base = if (dark) Palette.FLOOR_A else Palette.FLOOR_B
         p.color = base
-        c.drawRect(0f, 0f, s.toFloat(), s.toFloat(), p)
-        // Лёгкая текстура "плиток".
+        c.drawRect(0f, 0f, s, s, p)
+        // Травяные "лужайки": короткие штрихи-травинки.
+        val blade = if (dark) Palette.FLOOR_B else Palette.FLOOR_A
+        p.color = blade
+        val pxs = scale.toFloat()
+        val blades = if (dark) {
+            arrayOf(
+                intArrayOf(2, 4, 3, 6), intArrayOf(9, 2, 10, 4), intArrayOf(11, 9, 12, 11),
+                intArrayOf(4, 11, 5, 13), intArrayOf(13, 12, 14, 14)
+            )
+        } else {
+            arrayOf(
+                intArrayOf(3, 2, 4, 4), intArrayOf(10, 4, 11, 6), intArrayOf(5, 9, 6, 11),
+                intArrayOf(12, 11, 13, 13), intArrayOf(2, 12, 3, 14)
+            )
+        }
+        for (b in blades) {
+            c.drawRect(b[0] * pxs, b[1] * pxs, b[2] * pxs, b[3] * pxs, p)
+        }
+        // Тёмная каёмка-шов между плитками (только сверху и слева).
         p.color = Palette.FLOOR_LINE
-        c.drawRect(0f, 0f, s.toFloat(), scale.toFloat(), p)
-        c.drawRect(0f, 0f, scale.toFloat(), s.toFloat(), p)
-        // Пару точек-вкраплений для живости.
-        p.color = if (dark) Palette.FLOOR_B else Palette.FLOOR_A
-        c.drawRect(scale * 3f, scale * 5f, scale * 4f, scale * 6f, p)
-        c.drawRect(scale * 11f, scale * 2f, scale * 12f, scale * 3f, p)
+        c.drawRect(0f, 0f, s, pxs * 0.6f, p)
+        c.drawRect(0f, 0f, pxs * 0.6f, s, p)
+        // Светлая нижняя трава-блик.
+        p.color = if (dark) Palette.FLOOR_A else Palette.FLOOR_B
+        c.drawRect(pxs * 6f, s - pxs * 1.4f, pxs * 10f, s - pxs * 0.6f, p)
         bmp
     }
 
@@ -57,19 +75,30 @@ class SpriteFactory(private val scale: Int = 4) {
         val p = Paint().apply { isAntiAlias = false }
         // Базовый камень.
         p.color = Palette.WALL_MID
-        c.drawRect(0f, 0f, s.toFloat(), s.toFloat(), p)
-        // Верхний левый блик.
+        c.drawRect(0f, 0f, s, s, p)
+        // Верхняя фаска-блик (свет слева сверху).
         p.color = Palette.WALL_LIGHT
-        c.drawRect(scale * 1f, scale * 1f, s - scale * 1f, scale * 3f, p)
-        c.drawRect(scale * 1f, scale * 1f, scale * 3f, s - scale * 1f, p)
-        // Нижняя правая тень.
+        c.drawRect(0f, 0f, s, scale * 2f, p)
+        c.drawRect(0f, 0f, scale * 2f, s, p)
+        // Внутренняя плоскость.
+        p.color = Palette.WALL_MID
+        c.drawRect(scale * 2f, scale * 2f, s - scale * 2f, s - scale * 2f, p)
+        // Нижняя правая тень-фаска.
         p.color = Palette.WALL_DARK
-        c.drawRect(scale * 1f, s - scale * 3f, s - scale * 1f, s - scale * 1f, p)
-        c.drawRect(s - scale * 3f, scale * 1f, s - scale * 1f, s - scale * 1f, p)
-        // Глубокая трещина.
+        c.drawRect(0f, s - scale * 2f, s, s, p)
+        c.drawRect(s - scale * 2f, scale * 2f, s, s - scale * 2f, p)
+        // Глубокая каёмка по самому краю.
         p.color = Palette.WALL_DEEP
-        c.drawRect(scale * 6f, scale * 6f, scale * 7f, scale * 11f, p)
-        c.drawRect(scale * 7f, scale * 9f, scale * 10f, scale * 10f, p)
+        c.drawRect(0f, 0f, s, scale * 0.6f, p)
+        c.drawRect(0f, 0f, scale * 0.6f, s, p)
+        c.drawRect(0f, s - scale * 0.6f, s, s, p)
+        c.drawRect(s - scale * 0.6f, 0f, s, s, p)
+        // Лёгкая текстура камня: пара тёмных вкраплений.
+        p.color = Palette.WALL_DARK
+        c.drawRect(scale * 6f, scale * 6f, scale * 7f, scale * 7f, p)
+        c.drawRect(scale * 10f, scale * 10f, scale * 11f, scale * 11f, p)
+        p.color = Palette.WALL_LIGHT
+        c.drawRect(scale * 5f, scale * 9f, scale * 6f, scale * 10f, p)
         bmp
     }
 
@@ -79,20 +108,28 @@ class SpriteFactory(private val scale: Int = 4) {
         val bmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val c = Canvas(bmp)
         val p = Paint().apply { isAntiAlias = false }
+        // Базовый кирпич со скруглёнными визуально краями.
         p.color = Palette.BLOCK_MID
-        c.drawRect(0f, 0f, s.toFloat(), s.toFloat(), p)
-        // Кирпичная кладка.
+        c.drawRect(0f, 0f, s, s, p)
+        // Верхний блик.
         p.color = Palette.BLOCK_LIGHT
-        c.drawRect(scale * 1f, scale * 1f, s - scale * 1f, scale * 2f, p)
-        c.drawRect(scale * 1f, scale * 1f, scale * 2f, s - scale * 1f, p)
-        // Тёмные швы.
-        p.color = Palette.BLOCK_DEEP
-        c.drawRect(0f, scale * 7f, s.toFloat(), scale * 8f, p)
-        c.drawRect(0f, scale * 15f, s.toFloat(), scale * 16f, p)
-        c.drawRect(scale * 7f, scale * 8f, scale * 8f, scale * 15f, p)
-        // Правый нижний угол — тень.
+        c.drawRect(scale * 1f, scale * 1f, s - scale * 1f, scale * 2.4f, p)
+        c.drawRect(scale * 1f, scale * 1f, scale * 2.4f, s - scale * 1f, p)
+        // Нижняя тень.
         p.color = Palette.BLOCK_DARK
-        c.drawRect(s - scale * 3f, scale * 9f, s - scale * 1f, s - scale * 1f, p)
+        c.drawRect(scale * 1f, s - scale * 2.4f, s - scale * 1f, s - scale * 1f, p)
+        c.drawRect(s - scale * 2.4f, scale * 1f, s - scale * 1f, s - scale * 1f, p)
+        // Тёмные швы кирпичной кладки.
+        p.color = Palette.BLOCK_DEEP
+        c.drawRect(0f, scale * 7.4f, s, scale * 8.2f, p)
+        c.drawRect(0f, scale * 15.2f, s, scale * 16f, p)
+        c.drawRect(scale * 7.4f, scale * 8.2f, scale * 8.2f, scale * 15.2f, p)
+        // Кирпичики: мелкие светлые прямоугольники для рельефа.
+        p.color = Palette.BLOCK_LIGHT
+        c.drawRect(scale * 2f, scale * 3f, scale * 5f, scale * 3.8f, p)
+        c.drawRect(scale * 10f, scale * 3f, scale * 13f, scale * 3.8f, p)
+        c.drawRect(scale * 3f, scale * 11f, scale * 6f, scale * 11.8f, p)
+        c.drawRect(scale * 11f, scale * 11f, scale * 14f, scale * 11.8f, p)
         bmp
     }
 
@@ -109,22 +146,30 @@ class SpriteFactory(private val scale: Int = 4) {
         val bmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val c = Canvas(bmp)
         val p = Paint().apply { isAntiAlias = false }
+        // Тень под бомбой.
+        p.color = Color.argb(90, 20, 24, 50)
+        drawPixelEllipse(c, s / 2f, s * 0.86f, s * 0.26f, s * 0.06f, p)
         // Корпус — круг из "пикселей".
         val cx = s / 2f
         val cy = s * 0.58f
         val r = s * (if (frame == 0) 0.30f else 0.33f)
         drawPixelCircle(c, cx, cy, r, Palette.BOMB_MID, p)
-        drawPixelCircle(c, cx - r * 0.3f, cy - r * 0.3f, r * 0.35f, Palette.BOMB_LIGHT, p)
-        drawPixelCircle(c, cx + r * 0.35f, cy + r * 0.3f, r * 0.25f, Palette.BOMB_DARK, p)
+        // Нижняя тень корпуса.
+        drawPixelCircle(c, cx + r * 0.18f, cy + r * 0.22f, r * 0.62f, Palette.BOMB_DARK, p)
+        // Верхний блик.
+        drawPixelCircle(c, cx - r * 0.28f, cy - r * 0.30f, r * 0.42f, Palette.BOMB_LIGHT, p)
+        drawPixelCircle(c, cx - r * 0.32f, cy - r * 0.34f, r * 0.20f, Color.argb(200, 220, 226, 255), p)
         // Фитиль.
         p.color = Palette.FUSE
-        c.drawRect(cx - scale * 0.5f, cy - r - scale * 4f, cx + scale * 0.5f, cy - r, p)
+        c.drawRect(cx - scale * 0.6f, cy - r - scale * 4f, cx + scale * 0.6f, cy - r, p)
         // Искра.
         if (frame == 1) {
             p.color = Palette.SPARK
             c.drawRect(cx - scale * 1.5f, cy - r - scale * 6f, cx + scale * 1.5f, cy - r - scale * 3f, p)
             p.color = Palette.SPARK_HOT
-            c.drawRect(cx - scale * 0.5f, cy - r - scale * 5f, cx + scale * 0.5f, cy - r - scale * 4f, p)
+            c.drawRect(cx - scale * 0.6f, cy - r - scale * 5f, cx + scale * 0.6f, cy - r - scale * 4f, p)
+            p.color = Color.argb(230, 255, 255, 255)
+            c.drawRect(cx - scale * 0.3f, cy - r - scale * 4.6f, cx + scale * 0.3f, cy - r - scale * 4f, p)
         }
         bmp
     }

@@ -28,11 +28,27 @@ class SpriteFactory(private val scale: Int = 4) {
         val c = create()
         val base = if (dark) Palette.FLOOR_A else Palette.FLOOR_B
         c.drawRect(0f, 0f, s, s, base)
-        c.drawRect(0f, 0f, s, scale.toFloat(), Palette.FLOOR_LINE)
-        c.drawRect(0f, 0f, scale.toFloat(), s, Palette.FLOOR_LINE)
-        val speck = if (dark) Palette.FLOOR_B else Palette.FLOOR_A
-        c.drawRect(scale * 3f, scale * 5f, scale * 4f, scale * 6f, speck)
-        c.drawRect(scale * 11f, scale * 2f, scale * 12f, scale * 3f, speck)
+        // Травяные "лужайки": короткие штрихи-травинки.
+        val blade = if (dark) Palette.FLOOR_B else Palette.FLOOR_A
+        val blades = if (dark) {
+            arrayOf(
+                intArrayOf(2, 4, 3, 6), intArrayOf(9, 2, 10, 4), intArrayOf(11, 9, 12, 11),
+                intArrayOf(4, 11, 5, 13), intArrayOf(13, 12, 14, 14)
+            )
+        } else {
+            arrayOf(
+                intArrayOf(3, 2, 4, 4), intArrayOf(10, 4, 11, 6), intArrayOf(5, 9, 6, 11),
+                intArrayOf(12, 11, 13, 13), intArrayOf(2, 12, 3, 14)
+            )
+        }
+        for (b in blades) {
+            c.drawRect(b[0] * scale.toFloat(), b[1] * scale.toFloat(), b[2] * scale.toFloat(), b[3] * scale.toFloat(), blade)
+        }
+        // Тёмный шов между плитками.
+        c.drawRect(0f, 0f, s, scale * 0.6f, Palette.FLOOR_LINE)
+        c.drawRect(0f, 0f, scale * 0.6f, s, Palette.FLOOR_LINE)
+        // Светлая нижняя трава-блик.
+        c.drawRect(scale * 6f, s - scale * 1.4f, scale * 10f, s - scale * 0.6f, base)
         c
     }
 
@@ -40,12 +56,21 @@ class SpriteFactory(private val scale: Int = 4) {
         val s = (TILE * scale).toFloat()
         val c = create()
         c.drawRect(0f, 0f, s, s, Palette.WALL_MID)
-        c.drawRect(scale * 1f, scale * 1f, s - scale * 1f, scale * 3f, Palette.WALL_LIGHT)
-        c.drawRect(scale * 1f, scale * 1f, scale * 3f, s - scale * 1f, Palette.WALL_LIGHT)
-        c.drawRect(scale * 1f, s - scale * 3f, s - scale * 1f, s - scale * 1f, Palette.WALL_DARK)
-        c.drawRect(s - scale * 3f, scale * 1f, s - scale * 1f, s - scale * 1f, Palette.WALL_DARK)
-        c.drawRect(scale * 6f, scale * 6f, scale * 7f, scale * 11f, Palette.WALL_DEEP)
-        c.drawRect(scale * 7f, scale * 9f, scale * 10f, scale * 10f, Palette.WALL_DEEP)
+        // Верхняя фаска-блик.
+        c.drawRect(0f, 0f, s, scale * 2f, Palette.WALL_LIGHT)
+        c.drawRect(0f, 0f, scale * 2f, s, Palette.WALL_LIGHT)
+        // Нижняя правая тень-фаска.
+        c.drawRect(0f, s - scale * 2f, s, s, Palette.WALL_DARK)
+        c.drawRect(s - scale * 2f, scale * 2f, s, s - scale * 2f, Palette.WALL_DARK)
+        // Глубокая каёмка по краю.
+        c.drawRect(0f, 0f, s, scale * 0.6f, Palette.WALL_DEEP)
+        c.drawRect(0f, 0f, scale * 0.6f, s, Palette.WALL_DEEP)
+        c.drawRect(0f, s - scale * 0.6f, s, s, Palette.WALL_DEEP)
+        c.drawRect(s - scale * 0.6f, 0f, s, s, Palette.WALL_DEEP)
+        // Текстура камня.
+        c.drawRect(scale * 6f, scale * 6f, scale * 7f, scale * 7f, Palette.WALL_DARK)
+        c.drawRect(scale * 10f, scale * 10f, scale * 11f, scale * 11f, Palette.WALL_DARK)
+        c.drawRect(scale * 5f, scale * 9f, scale * 6f, scale * 10f, Palette.WALL_LIGHT)
         c
     }
 
@@ -53,12 +78,21 @@ class SpriteFactory(private val scale: Int = 4) {
         val s = (TILE * scale).toFloat()
         val c = create()
         c.drawRect(0f, 0f, s, s, Palette.BLOCK_MID)
-        c.drawRect(scale * 1f, scale * 1f, s - scale * 1f, scale * 2f, Palette.BLOCK_LIGHT)
-        c.drawRect(scale * 1f, scale * 1f, scale * 2f, s - scale * 1f, Palette.BLOCK_LIGHT)
-        c.drawRect(0f, scale * 7f, s, scale * 8f, Palette.BLOCK_DEEP)
-        c.drawRect(0f, scale * 15f, s, scale * 16f, Palette.BLOCK_DEEP)
-        c.drawRect(scale * 7f, scale * 8f, scale * 8f, scale * 15f, Palette.BLOCK_DEEP)
-        c.drawRect(s - scale * 3f, scale * 9f, s - scale * 1f, s - scale * 1f, Palette.BLOCK_DARK)
+        // Верхний блик.
+        c.drawRect(scale * 1f, scale * 1f, s - scale * 1f, scale * 2.4f, Palette.BLOCK_LIGHT)
+        c.drawRect(scale * 1f, scale * 1f, scale * 2.4f, s - scale * 1f, Palette.BLOCK_LIGHT)
+        // Нижняя тень.
+        c.drawRect(scale * 1f, s - scale * 2.4f, s - scale * 1f, s - scale * 1f, Palette.BLOCK_DARK)
+        c.drawRect(s - scale * 2.4f, scale * 1f, s - scale * 1f, s - scale * 1f, Palette.BLOCK_DARK)
+        // Тёмные шовы кирпичной кладки.
+        c.drawRect(0f, scale * 7.4f, s, scale * 8.2f, Palette.BLOCK_DEEP)
+        c.drawRect(0f, scale * 15.2f, s, scale * 16f, Palette.BLOCK_DEEP)
+        c.drawRect(scale * 7.4f, scale * 8.2f, scale * 8.2f, scale * 15.2f, Palette.BLOCK_DEEP)
+        // Кирпичики-рельеф.
+        c.drawRect(scale * 2f, scale * 3f, scale * 5f, scale * 3.8f, Palette.BLOCK_LIGHT)
+        c.drawRect(scale * 10f, scale * 3f, scale * 13f, scale * 3.8f, Palette.BLOCK_LIGHT)
+        c.drawRect(scale * 3f, scale * 11f, scale * 6f, scale * 11.8f, Palette.BLOCK_LIGHT)
+        c.drawRect(scale * 11f, scale * 11f, scale * 14f, scale * 11.8f, Palette.BLOCK_LIGHT)
         c
     }
 
@@ -67,16 +101,20 @@ class SpriteFactory(private val scale: Int = 4) {
     fun bomb(frame: Int): PixCanvas = getOrPut("bomb_$frame") {
         val s = (TILE * scale).toFloat()
         val c = create()
+        // Тень под бомбой.
+        drawPixelEllipse(c, s / 2f, s * 0.86f, s * 0.26f, s * 0.06f, 0x5A000000)
         val cx = s / 2f
         val cy = s * 0.58f
         val r = s * (if (frame == 0) 0.30f else 0.33f)
         drawPixelCircle(c, cx, cy, r, Palette.BOMB_MID)
-        drawPixelCircle(c, cx - r * 0.3f, cy - r * 0.3f, r * 0.35f, Palette.BOMB_LIGHT)
-        drawPixelCircle(c, cx + r * 0.35f, cy + r * 0.3f, r * 0.25f, Palette.BOMB_DARK)
-        c.drawRect(cx - scale * 0.5f, cy - r - scale * 4f, cx + scale * 0.5f, cy - r, Palette.FUSE)
+        drawPixelCircle(c, cx + r * 0.18f, cy + r * 0.22f, r * 0.62f, Palette.BOMB_DARK)
+        drawPixelCircle(c, cx - r * 0.28f, cy - r * 0.30f, r * 0.42f, Palette.BOMB_LIGHT)
+        drawPixelCircle(c, cx - r * 0.32f, cy - r * 0.34f, r * 0.20f, 0xC8DCE2FF.toInt())
+        c.drawRect(cx - scale * 0.6f, cy - r - scale * 4f, cx + scale * 0.6f, cy - r, Palette.FUSE)
         if (frame == 1) {
             c.drawRect(cx - scale * 1.5f, cy - r - scale * 6f, cx + scale * 1.5f, cy - r - scale * 3f, Palette.SPARK)
-            c.drawRect(cx - scale * 0.5f, cy - r - scale * 5f, cx + scale * 0.5f, cy - r - scale * 4f, Palette.SPARK_HOT)
+            c.drawRect(cx - scale * 0.6f, cy - r - scale * 5f, cx + scale * 0.6f, cy - r - scale * 4f, Palette.SPARK_HOT)
+            c.drawRect(cx - scale * 0.3f, cy - r - scale * 4.6f, cx + scale * 0.3f, cy - r - scale * 4f, 0xE6FFFFFF.toInt())
         }
         c
     }

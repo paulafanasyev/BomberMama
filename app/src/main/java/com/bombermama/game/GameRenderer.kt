@@ -83,6 +83,7 @@ class GameRenderer(private val sprites: SpriteFactory) {
         // Фон.
         canvas.drawColor(Palette.BLACK)
 
+        drawFieldFrame(canvas, engine)
         drawField(canvas, engine)
         drawBombs(canvas, engine)
         drawBonuses(canvas, engine)
@@ -95,8 +96,34 @@ class GameRenderer(private val sprites: SpriteFactory) {
 
         // Затемнение на паузе.
         if (engine.state == GameState.PAUSED) {
-            canvas.drawColor(Color.argb(140, 26, 22, 38))
+            canvas.drawColor(Color.argb(150, 27, 33, 72))
         }
+    }
+
+    // =========================================================================
+    // Рамка поля
+    // =========================================================================
+
+    private val framePaint = Paint().apply { isAntiAlias = false }
+
+    /** Декоративная рамка вокруг поля + мягкая тень под ним. */
+    private fun drawFieldFrame(canvas: Canvas, engine: GameEngine) {
+        val f = engine.field
+        val left = offsetX - tileSize * 0.18f
+        val top = offsetY - tileSize * 0.18f
+        val right = offsetX + f.width * tileSize + tileSize * 0.18f
+        val bottom = offsetY + f.height * tileSize + tileSize * 0.18f
+        // Внешняя тень.
+        framePaint.color = Color.argb(90, 0, 0, 0)
+        canvas.drawRect(left + tileSize * 0.1f, top + tileSize * 0.12f, right + tileSize * 0.1f, bottom + tileSize * 0.12f, framePaint)
+        // Тёмная каёмка.
+        framePaint.color = Palette.WALL_DEEP
+        canvas.drawRect(left, top, right, bottom, framePaint)
+        // Светлая внутренняя грань.
+        framePaint.color = Palette.WALL_LIGHT
+        val inset = tileSize * 0.06f
+        canvas.drawRect(left + inset, top + inset, right - inset, top + inset + tileSize * 0.06f, framePaint)
+        canvas.drawRect(left + inset, top + inset, left + inset + tileSize * 0.06f, bottom - inset, framePaint)
     }
 
     // =========================================================================

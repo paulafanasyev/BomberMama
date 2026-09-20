@@ -5,15 +5,16 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/bg_menu">
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@mipmap/ic_launcher"
+        android:layout_width="280dp"
+        android:layout_height="0dp"
+        android:src="@drawable/logo_banner"
         android:contentDescription="@string/app_name"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="12dp"
+        android:layout_weight="0" />
 
     <TextView
         android:id="@+id/title"
@@ -28,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/menu_subtitle"
-        android:textColor="@color/ui_dim"
+        android:textColor="@color/ui_text_light"
         android:textSize="14sp"
         android:layout_marginBottom="28dp" />
 

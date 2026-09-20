@@ -35,6 +35,9 @@ captures/
 *.jks
 *.keystore
 
+# Signing secrets (store/key passwords) — never commit
+signing.properties
+
 # Debug / release outputs we intentionally keep at repo root are ignored by pattern above;
 # CI re-builds them. Keep tooling scripts though.
 !tools/
