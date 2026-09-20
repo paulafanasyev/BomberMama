@@ -1,0 +1,12 @@
+name: BomberMama Actions Sanity Check
+
+on:
+  push:
+    branches:
+      - audit/emulator-2026-09-20
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "GITHUB_ACTIONS_SANITY_OK"
