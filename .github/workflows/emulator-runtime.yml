@@ -1,0 +1,30 @@
+name: BomberMama Emulator Runtime
+
+on:
+  push:
+    branches:
+      - audit/emulator-2026-09-20
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_2
+          emulator-options: -no-window -no-audio -gpu swiftshader_indirect -no-snapshot -no-boot-anim
+          disable-animations: true
+          script: bash audit/emulator_action_test.sh
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bombermama-emulator-runtime
+          path: audit/
+          retention-days: 7
